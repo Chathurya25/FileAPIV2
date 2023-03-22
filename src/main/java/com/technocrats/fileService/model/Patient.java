@@ -6,7 +6,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Getter
@@ -23,7 +22,7 @@ public class Patient {
 
 
 
-    @OneToMany(mappedBy="patient")
-    private Set<File> files;
+//    @OneToMany(mappedBy="patient")
+//    private Set<FileEntity> fileEntities;
 
 }
