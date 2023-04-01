@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -14,21 +16,18 @@ import lombok.Setter;
 @Table(name = "file")
 public class FileEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "f_id", nullable = false)
-    private Long id;
-
+    private String id;
     @Lob
+    @Column(name = "Data", length = 30000000)
     private byte[] data;
-
-
-
-    @Column(nullable = false)
+    @Column(name = "FileName" , nullable = false)
     private String fileName;
     @Column(nullable = false)
     private String fileType;
-    @Column(nullable = false, unique = true)
+    @Column(name = "Owner" , nullable = false)
     private String owner;
+
+
 
 //    @ManyToOne
 //    @JoinColumn(name="p_id", nullable=false)
