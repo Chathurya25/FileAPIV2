@@ -15,19 +15,31 @@ public class FileService {
     @Autowired
     private FileRepository fileRepository;
 
-    public FileEntity saveFile(MultipartFile file){
-        String filename = file.getOriginalFilename();
+    public boolean saveFile(MultipartFile file, String message, String owner ){
         try{
+           // Get the file name from the file.
+           String filename = file.getOriginalFilename();
+           // Create an object of the file entity to save in the database.
            FileEntity fileEntityToSave = new FileEntity();
+           // Populate the object with the data from the rest call.
+            fileEntityToSave.setId(UUID.randomUUID().toString());
            fileEntityToSave.setFileName(filename);
            fileEntityToSave.setFileType(file.getContentType());
            fileEntityToSave.setOwner(owner);
            fileEntityToSave.setData(file.getBytes());
-           return fileRepository.save(fileEntityToSave);
-        }catch (Exception e) {
-            e.printStackTrace();
+           fileEntityToSave.setDate(new Date());
+           fileEntityToSave.setMessage(message);
+           // Use the JPA repository to save the object as a record in the database
+           FileEntity savedFile =  fileRepository.save(fileEntityToSave);
+           if (savedFile == null){
+               return false;
+           }else {
+               return true;
+           }
+        }catch (Exception exception) {
+            exception.printStackTrace();
+            return false;
         }
-        return null;
     }
 
     public Optional<FileEntity> getFile(Long fileId) {

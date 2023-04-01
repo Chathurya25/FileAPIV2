@@ -22,10 +22,14 @@ public class FileEntity {
     private byte[] data;
     @Column(name = "FileName" , nullable = false)
     private String fileName;
-    @Column(nullable = false)
+    @Column(name = "FileType" , nullable = false)
     private String fileType;
     @Column(name = "Owner" , nullable = false)
     private String owner;
+    @Column(name = "Date")
+    private Date date;
+    @Column(name = "Message")
+    private String message;
 
 
 
