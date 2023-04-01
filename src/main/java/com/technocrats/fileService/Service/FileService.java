@@ -6,9 +6,7 @@ import com.technocrats.fileService.model.FileEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.util.*;
-
 
 @Service
 public class FileService {
@@ -42,13 +40,24 @@ public class FileService {
         }
     }
 
-    public Optional<FileEntity> getFile(Long fileId) {
+    public Optional<FileEntity> getFile(String fileId) {
         return fileRepository.findById(fileId);
     }
 
-    public List<FileDto>getFiles(){
+    public boolean deleteFile(String fileId) {
+        try{
+            fileRepository.deleteById(fileId);
+            return true;
+        }catch(Exception exception){
+            return false;
+        }
 
-        List<FileEntity> files = fileRepository.findAll();
+    }
+
+
+    public List<FileDto>getFiles(String owner){
+
+        List<FileEntity> files = fileRepository.findAllByOwner(owner);
 
         List<FileDto> fileDtoList = new ArrayList<>();
 
@@ -62,6 +71,5 @@ public class FileService {
         });
         return fileDtoList;
     }
-
 
 }

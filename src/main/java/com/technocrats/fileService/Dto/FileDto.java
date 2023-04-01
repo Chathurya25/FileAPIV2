@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
 
+import java.util.Date;
+
 
 @Getter
 @Setter
@@ -17,5 +19,7 @@ public class FileDto {
     private String fileName;
     private String fileType;
     private String owner;
+    private Date date;
+    private String message;
 
 }
